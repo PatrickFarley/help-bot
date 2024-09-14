@@ -36,8 +36,10 @@
 - automate the step of re-deploying the chat playground to the web app endpoint.
 - enable vector search (done at the index creation step I think)
     - possibly hybrid search and reranking too.
-- enable "prompt-rewriting" feature in the OpenAI RAG setup. is it automatic?
-- optimize OpenAI parameters. I'm told 0.3 temperature is recommended for RAG
+- Optimize the OpenAI RAG setup
+    - enable "prompt-rewriting" feature. is it automatic?
+    - optimize the system prompt
+    - optimize model parameters. I'm told 0.3 temperature is recommended for RAG
 - clear the metadata of all existing include files
 - estimate/optimize costs
 
