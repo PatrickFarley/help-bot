@@ -21,7 +21,7 @@
 1. Connect your resources
     1. apply the [required Role assignments](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/use-your-data-securely#role-assignments)
     2. In AI Studio, open the chat playground and **Add your data**. attach the AI Search index. use custom field mappings to pull in the `"url"` field.
-1. Configure the web app: in the chat playground select **Deploy**, and enter the web app details. I think certain regions don't work. EastUS2 seems to work.
+1. [Configure the web app](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/use-web-app): in the chat playground select **Deploy**, and enter the web app details. I think certain regions don't work. EastUS2 seems to work.
 
 
 ## Further enhancements
@@ -41,6 +41,7 @@
 ## resources
 
 - anything useful here? https://github.com/Azure-Samples/azure-search-openai-demo/
+- learn about web app settings: https://github.com/microsoft/sample-app-aoai-chatGPT
 - investigate knowledge service - https://eng.ms/docs/cloud-ai-platform/commerce-ecosystems/growth-ecosystems/growth-engineering/learn-discovery/learn-knowledge-service-partner-integration-docs 
 
 ## context with other projects
