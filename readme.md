@@ -1,42 +1,52 @@
 # Help docs bot
 
-## Portal configuration:
+## How to build this project:
 
-the storage account
-- 1 container; no special configuration.
+1. Acquire a local index of the contributor guide docs:
+    1. use git to clone/pull, or run the git-update script.
+    1. Make a separate local-index file to hold a working copy of those files. run the make-local-index script to populate it. It does special directory-flattening and renaming. And leaves out archived files.
+1. Configure blob storage: 
+    1. Create a storage account and a container.
+    1. save the connection string to env variable
+    1. run blob-upload script. it uploads the docs in local-index to the storage blob.
+    1. run set-url-metadata: for each .md doc, create the url metadata value and attach it to the blob
+    1. rm-include-urls: set the url metadata for include files to blank (we don't want to try to construct those urls)
+1. Configure the Azure AI Search
+    1. Add the blob container as a data source
+    1. create an index, with a string field called `"url"` and a content field called `"content"`.
+    1. index the data source: go to the AI Search overview, select **Import data**, use the existing data source and the existing index.
+    1. When it finishes, you should have a populated index that you can query in the Azure Portal
+1. Configure the Azure OpenAI Resource
+    1. EastUS, with gpt-4o (maxed out tokens) seems to work.
+1. Connect your resources
+    1. apply the [required Role assignments](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/use-your-data-securely#role-assignments)
+    2. In AI Studio, open the chat playground and **Add your data**. attach the AI Search index. use custom field mappings to pull in the `"url"` field.
+1. Configure the web app: in the chat playground select **Deploy**, and enter the web app details. I think certain regions don't work. EastUS2 seems to work.
 
-the Azure AI Search index:
-- You need this field availability: ![alt text](./default-fields.png)
 
 ## Python automation scripts:
-1. git-update: pull latest help-docs-pr from github. 
-1. make-local-index: clear the local-index contents and create anew: local flat index list
-    1. ignore the archive folder
-    1. rename the files so the name reflects the folder path, using a special delimiter
-1. blob-upload: blanket upload docs to the storage blob (quits after a certain number?)
-    1. set-url-metadata: for each .md doc, create the url metadata value and attach it to the blob
-    1. rm-include-urls: set the url metadata for includes to blank
-    2. propagate deletions to the datasource object?? (enabled now, I think)
-1. refresh the indexer and run it again.
+1. 
 1. re-attach the index to the help-docs-bot GPT deployment. (actually, if the index is updated then the bot performance will be updated)
 1. TODO: re-deploy the help-docs-bot to the web app endpoint
     1. can that be automated? Ask michael?
 
 ## Further enhancements
 
-- enable vector search (done at the index-creation step I think)
+- do local-index deletions propagate through the blob container to the index (when the indexer is re-run)? I don't think they are.
+- automate the step of re-deploying the chat playground to the web app endpoint.
+- enable vector search (done at the index creation step I think)
     - possibly hybrid search and reranking too.
-- don't give includes a url (filter "include/" out of the path.)
+- enable "prompt-rewriting" feature in the OpenAI RAG setup. is it automatic?
+- optimize OpenAI parameters. I'm told 0.3 temperature is recommended for RAG
 - clear the metadata of all existing include files
-- estimate costs
-- enable prompt-rewriting? is it automatic?
-- anything here? https://github.com/Azure-Samples/azure-search-openai-demo/
+- estimate/optimize costs
+
+## resources
+
+- anything useful here? https://github.com/Azure-Samples/azure-search-openai-demo/
 - investigate knowledge service - https://eng.ms/docs/cloud-ai-platform/commerce-ecosystems/growth-ecosystems/growth-engineering/learn-discovery/learn-knowledge-service-partner-integration-docs 
-- use 0.3 temperature
-- do evaluation.
 
 ## context with other projects
 
-- dina wants to work on a vscode extension
-- we're writing a proposal for the leadership team.. to get visibility.
-- Amy viviano is workiing on a similar extension - not chat, but to use ai to automatically apply the platform manual's rules to your doc.
+- Dina Berry wants to work on a similar vscode extension
+- Amy Viviano is working on a similar extension - not chat, but to use AI to automatically apply the platform manual's rules to your doc.
