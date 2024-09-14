@@ -24,14 +24,9 @@
 1. Configure the web app: in the chat playground select **Deploy**, and enter the web app details. I think certain regions don't work. EastUS2 seems to work.
 
 
-## Python automation scripts:
-1. 
-1. re-attach the index to the help-docs-bot GPT deployment. (actually, if the index is updated then the bot performance will be updated)
-1. TODO: re-deploy the help-docs-bot to the web app endpoint
-    1. can that be automated? Ask michael?
-
 ## Further enhancements
 
+- the model is not very good at propagating the "url" metadata attached to the files. It sometimes hallucinates urls.
 - do local-index deletions propagate through the blob container to the index (when the indexer is re-run)? I don't think they are.
 - automate the step of re-deploying the chat playground to the web app endpoint.
 - enable vector search (done at the index creation step I think)
