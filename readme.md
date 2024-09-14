@@ -1,16 +1,23 @@
 # Help docs bot
 
+## Introduction
+
+This is a copilot that does RAG with the docs in the contributor guide and the platform manual to tell users anything they need to know when contributing to the docs on `learn.microsoft.com`.
+
+Ideally available to all FTEs.
+
+
 ## How to build this project:
 
 1. Acquire a local index of the contributor guide docs:
-    1. use git to clone/pull, or run the git-update script.
-    1. Make a separate local-index file to hold a working copy of those files. run the make-local-index script to populate it. It does special directory-flattening and renaming. And leaves out archived files.
+    1. use git to clone/pull, or run the `git-update` script.
+    1. Make a separate local-index file to hold a working copy of those files. run the `make-local-index` script to populate it. It does special directory-flattening and renaming. And leaves out archived files.
 1. Configure blob storage: 
     1. Create a storage account and a container.
     1. save the connection string to env variable
-    1. run blob-upload script. it uploads the docs in local-index to the storage blob.
-    1. run set-url-metadata: for each .md doc, create the url metadata value and attach it to the blob
-    1. rm-include-urls: set the url metadata for include files to blank (we don't want to try to construct those urls)
+    1. run `blob-upload` script. it uploads the docs in local-index to the storage blob.
+    1. run `set-url-metadata`: for each .md doc, create the url metadata value and attach it to the blob
+    1. `rm-include-urls`: set the url metadata for include files to blank (we don't want to try to construct those urls)
 1. Configure the Azure AI Search
     1. Add the blob container as a data source
     1. create an index, with a string field called `"url"` and a content field called `"content"`.
@@ -18,7 +25,7 @@
     1. When it finishes, you should have a populated index that you can query in the Azure Portal
 1. Configure the Azure OpenAI Resource
     1. EastUS, with gpt-4o (maxed out tokens) seems to work.
-1. Connect your resources
+1. Connect your resources to each other
     1. apply the [required Role assignments](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/use-your-data-securely#role-assignments)
     2. In AI Studio, open the chat playground and **Add your data**. attach the AI Search index. use custom field mappings to pull in the `"url"` field.
 1. [Configure the web app](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/use-web-app): in the chat playground select **Deploy**, and enter the web app details. I think certain regions don't work. EastUS2 seems to work.
