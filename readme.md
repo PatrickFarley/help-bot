@@ -37,7 +37,7 @@ Ideally available to all FTEs.
 - the model is not very good at propagating the "url" metadata attached to the files. It sometimes hallucinates urls.
 - do local-index deletions propagate through the blob container to the index (when the indexer is re-run)? I don't think they are.
 - automate the step of re-deploying the chat playground to the web app endpoint.
-- enable vector search (done at the index creation step I think)
+- enable vector search (done at the index creation step I think) - https://learn.microsoft.com/en-us/azure/ai-studio/how-to/index-add 
     - possibly hybrid search and reranking too.
 - Optimize the OpenAI RAG setup
     - enable "prompt-rewriting" feature. is it automatic?
