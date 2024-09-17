@@ -1,4 +1,5 @@
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+import os
 
 # Define your storage account connection string
 connection_string = os.getenv('BLOB_CONNECTION_STRING')
@@ -29,6 +30,6 @@ for blob in blobs:
         blob_client = BlobClient.from_connection_string(conn_str=connection_string, container_name=container_name, blob_name=blob.name)
     
         # Set metadata for the blob (including the URL)
-        blob_client.set_blob_metadata(metadata={"URL": blob_url})
+        blob_client.set_blob_metadata(metadata={"original_url": blob_url})
 
         print(f"Set URL metadata for blob '{blob.name}': {blob_url}")
