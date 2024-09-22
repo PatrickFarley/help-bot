@@ -52,7 +52,7 @@ Ideally available to all FTEs.
     - What are some best practices for technical writing in the Microsoft docs?
     - How should I document API endpoints?
     - What is the appropriate way to document a new feature?
-    - File Management:
+- File Management:
     - How do I add a new file to the documentation repository?
     - What is the folder structure for the documentation?
     - How should images be included in the docs?
