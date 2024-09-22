@@ -30,6 +30,44 @@ Ideally available to all FTEs.
     2. In AI Studio, open the chat playground and **Add your data**. attach the AI Search index. use custom field mappings to pull in the `"url"` field.
 1. [Configure the web app](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/use-web-app): in the chat playground select **Deploy**, and enter the web app details. I think certain regions don't work. EastUS2 seems to work.
 
+## Learnings from Hackathon
+
+- semantic search didn't improve anything.
+- system message can prevent it making up bad links
+- temperature 0.3 seems to be better
+- examples aren't available.
+- it needs to relay the context of its instructions - platform vs contrib content, docs vs training.
+- Jeh says refreshing the index 2x every day is best. says 2200 articles.
+sample ques
+- General Contribution Guidelines:
+    - "How do I contribute to the learn.microsoft.com documentation?"
+    - "What are the prerequisites for contributing to the docs?"
+    - "What is the process for submitting a pull request?"
+- Formatting and Style:
+    - "What is the recommended style guide for writing documentation?"
+    - "How should code snippets be formatted in the documentation?"
+    - "Are there any specific guidelines for writing headings and subheadings?"
+- Technical Writing:
+    - "What are some best practices for technical writing in the Microsoft docs?"
+    - "How should I document API endpoints?"
+    - "What is the appropriate way to document a new feature?"
+    - File Management:
+    - "How do I add a new file to the documentation repository?"
+    - "What is the folder structure for the documentation?"
+    - "How should images be included in the docs?"
+- Review and Approval:
+    - "What is the review process for submitted documentation?"
+    - "Who can approve my pull request?"
+    - "How long does it usually take for a pull request to be reviewed?"
+- Common Issues:
+    - "What should I do if my pull request is rejected?"
+    - "How do I resolve merge conflicts in the documentation repository?"
+    - "What are some common mistakes to avoid when contributing to the docs?"
+
+We should remove wwl content from the index.
+training vs "documentation"
+
+BIC team has a different process, they should not use our guide.
 
 ## Further enhancements
 
