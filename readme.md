@@ -72,6 +72,7 @@ BIC team has a different process, they should not use our guide.
 
 ## Further enhancements
 
+- add more repos; consider making the bot like an index of many families of internal docs.
 - use the "examples" feature in the chat playground to teach the model what kind of response format we want.
 - the model is not very good at propagating the "url" metadata attached to the files. It sometimes hallucinates urls.
 - do local-index deletions propagate through the blob container to the index (when the indexer is re-run)? I don't think they are.
